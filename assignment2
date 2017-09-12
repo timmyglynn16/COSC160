@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+  public class assignment2
+  {
+    public static void main(String [] args)
+    {
+      
+      // set variables
+      double A, B, C, D, altRoot, root1, root2;
+      
+      // set object kb to the main Scanner
+      Scanner kb = new Scanner(System.in);
+      
+      //enter the values A, B, C, for quadratic formula/equation
+      System.out.println("Enter values for A, B and C");
+      A = kb.nextDouble();
+      B = kb.nextDouble();
+      C = kb.nextDouble();
+      
+      // print the new full quadratic equation
+      System.out.println("The Quadratic Equation is ");
+      System.out.println(A+"x^2 + " + B+"x + " + C + " = 0");        
+  
+      // calculate discriminant from quadtratic formula 
+      D = (B*B) - (4 * A * C);     
+      System.out.println("The discriminant is " + D + " according to quadratic formula");
+      
+      if (A == 0 && B == 0) // if both A and B equal 0 then the equation has no solution 
+      {
+        System.out.println("The System Has No Solution "); 
+      }
+      else if (A == 0) // if just A is 0 then there is an alternate root -C/B
+      {
+        altRoot = -C/B; 
+        System.out.println("Both roots both equal -C/B because A = 0 ");
+        System.out.println("Therfore the altnernate root is " + altRoot);
+      }
+      else if (D < 0) // if D is less than 0 then the roots are imaginary
+      {
+        System.out.println("Roots are imaginary ");
+      }
+      else if (D > 0) // if D is greater than 0 then the roots are real and given by the quadtratic formula 
+      {
+        root1 = -B + (Math.sqrt(D))/(2*A);
+        root2 = -B - (Math.sqrt(D))/(2*A);
+        System.out.println("The first root is " + root1);
+        System.out.println("The second root is " + root2);
+      }
+      else if (D == 0) // if D equals 0 then there is another alternate root equation -B/2A
+      {
+        altRoot = -B/(2*A);
+        System.out.println("The roots are both equal to -B/2A because discriminant = 0");
+        System.out.println("Therefore the alternate root is " + altRoot);
+      }
+         
+    } // end main
+  } // end class 
