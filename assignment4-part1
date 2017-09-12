@@ -1,0 +1,42 @@
+import java.util.Scanner;
+public class universityCost
+{
+  public static void main(String[ ] args)
+  {
+    
+    Scanner kb = new Scanner(System.in);
+    
+    // object and class created, constructor called
+    myTuition tp = new myTuition(); // first myTuition = class, tp = object, second myTution = constructor 
+    
+    char studentType;
+    
+    // call menu function 
+    tp.Menu();
+    
+    // start do while loop to ask for different types of college student 
+    do
+    {
+      System.out.println("What type of student are you? ");
+      studentType = kb.next().charAt(0);
+      
+      switch(studentType)
+      {
+        case '1': tp.Graduate();
+        break;
+        case '2': tp.UndergraduateRes();
+        break;   
+        case '3': tp.UndergraduateNonRes();
+        break;
+        case '4': tp.UndergraduateInt();
+        break;
+        case 'Q': System.out.println("Quit ");
+        break;
+      }
+    }
+      
+      while (studentType != 'Q');
+
+    }
+}
+   
