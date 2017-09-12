@@ -1,0 +1,85 @@
+import java.util.Scanner;
+public class bankAccount1
+{
+  static Scanner kb = new Scanner(System.in); // applies to whole main when before main
+  public static void main(String[ ] args)
+  {
+   
+    char option;
+    double initialBal, balance;
+    
+    System.out.println("Enter the initial balance ");
+    initialBal = kb.nextDouble();
+    
+    balance = initialBal;
+    menu(); 
+    do
+    {
+      System.out.println("What is the option? ");
+      option = kb.next().charAt(0);
+      
+      switch (option) // if the switch option was an integer it would be numbers not 'letter'
+      {
+        case 'D': balance = Deposit(balance); // this line is calling the method deposit, sending balance to it 
+        break; // send the balance to method deposit then send balance back to new balance and print new balance
+        
+        case 'W': balance = Withdraw(balance); // these methods must be returning methods!!
+        break; // need to return the balance because these fuctions (D/W) are related!!
+        
+        // "when methods are related, we must return the value back"
+        
+        case 'P': Print(initialBal, balance);
+        break;
+        
+        case 'Q': System.out.println("Quit ");
+        break;
+      } // end switch
+       
+    } // end loop
+    
+    while(option != 'Q');
+  
+  } // end main
+  
+  public static void menu()
+  {
+    System.out.println("\t D: Deposit ");
+    System.out.println("\t W: Withdraw ");
+    System.out.println("\t P: Print "); // dont use print as separate method
+    System.out.println("\t Q: Quit ");
+  }
+  
+  public static double Deposit(double balance) // Deposit is name of method 
+  {
+    double dep, totalDep = 0; // local variables
+    
+    System.out.println("Enter deposit ");
+    dep = kb.nextDouble();
+    balance = balance + dep;
+    totalDep = totalDep + dep;
+    System.out.println("Total Deposit = " + totalDep);
+    return balance;
+  }
+  
+  public static double Withdraw(double balance) // Withdraw is name of method
+  {
+    double check, totalCheck = 0;
+    
+    System.out.println("Enter check ");
+    check = kb.nextDouble();
+    balance = balance - check;
+    totalCheck = totalCheck + check;
+    System.out.println("Total check = " + totalCheck);
+    return balance;
+  }
+  
+  public static void Print(double initialBal, 
+                           double balance)
+  {
+    System.out.println("The initial balance was = " 
+                         + initialBal);
+    System.out.println("The current balance is = " 
+                         + balance);
+  }
+  
+} // end class 
