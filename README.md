@@ -1,2 +1,7 @@
 # introJava-assignments
-All assigned programs written in my intro to java class 
+
+assignment1:
+assignment2:
+assignment3:
+assignment4-part1:
+assignment4-part2: 
