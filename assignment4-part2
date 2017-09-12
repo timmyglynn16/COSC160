@@ -1,0 +1,330 @@
+import java.util.Scanner;
+public class myTuition
+{
+  // declare instance variables
+  double tuition;
+  int mealplanPrice, summerTuition, roomBoardPrice;
+  int credits, fallCredits, springCredits, extraCredits, summerCredits ;
+  int fullFee = 650*2, partFee = 55*2;
+  char type, summer, mealplan, roomBoard;
+  
+  Scanner kb = new Scanner(System.in);
+  
+  public static void Menu()
+  {
+    System.out.println("\n\t Enter 1 for Graduate ");
+    System.out.println("\n\t Enter 2 for Undergraduate Resident ");
+    System.out.println("\n\t Enter 3 for Undergraduate Non-Resident ");
+    System.out.println("\n\t Enter 4 for Undergraduate International ");
+    System.out.println("\n\t Enter Q to Quit ");
+    
+  }
+   
+    // start the first student type
+    public void Graduate()
+    {
+      
+      System.out.println("How many fall credits are you taking? ");
+      fallCredits = kb.nextInt();
+      
+      System.out.println("How many spring credits are you taking? ");
+      springCredits = kb.nextInt();
+      
+      credits = fallCredits + springCredits;
+     
+      // use if statements to call different types of grad students
+      System.out.println("What type of Grad student are you? ");
+      System.out.println("Resident = R, Non Resident = N, International = I, Quit = Q ");
+      type = kb.next().charAt(0);
+      
+      
+      System.out.println("Are you taking summer classes? ");
+      System.out.println("Y = yes, N = no");
+      summer = kb.next().charAt(0);
+      
+      if (summer == 'Y') // if yes summer housing
+      {
+        System.out.println("How many summer credits? ");
+        summerCredits = kb.nextInt();
+        summerTuition = (325 * summerCredits);
+      }
+      else if (summer == 'N') // if no summer housing
+      {
+        summerTuition = 0;
+      }
+      
+      System.out.println("Do you want a meal plan? (meal plan mandatory for residents) ");
+      System.out.println("Y = yes, N = no ");
+      mealplan = kb.next().charAt(0);
+      
+      if (mealplan == 'Y') // if yes meal plan
+      {
+        mealplanPrice = 2400*2; // give price of meal plan
+      }
+      else if (mealplan == 'N') // if no meal plan
+      {
+        mealplanPrice = 0; // meal plan price is 0
+      }
+       
+      // new if statement
+        if(type == 'R') // if resident graduate student
+      {
+        tuition = (510 * credits) + (110 * credits); // calculated from given tables
+        System.out.println("Cost for Graduate Resident Student per year = " + (tuition * 2) + summerTuition + mealplanPrice);
+      }
+      else if(type == 'N') // if non resident graduate student
+      {
+        tuition = (780 * credits) + (165 * credits); // calculated from given tables
+        System.out.println("Cost for Graduate Non-Resident Student per year = " + (tuition * 2) + summerTuition + mealplanPrice);
+      }
+      else if(type == 'I') // if international graduate student
+      {
+        tuition = (780 * credits) + (165 * credits); // calculated from given tables
+        System.out.println("Cost for Graduate International Student per year = " + (tuition * 2) + summerTuition + mealplanPrice);
+      }
+      else if (type == 'Q') 
+      {
+        System.out.println("Quit ");
+      }
+      
+      Menu();
+    }
+    
+    // start undergraduate resident student method 
+    public void UndergraduateRes()
+    {
+      
+      System.out.println("How many fall credits are you taking? ");
+      fallCredits = kb.nextInt();
+      
+      System.out.println("How many spring credits are you taking? ");
+      springCredits = kb.nextInt();
+      
+      credits = fallCredits + springCredits;
+      
+      System.out.println("Are you taking summer classes? ");
+      System.out.println("Y = yes, N = no");
+      summer = kb.next().charAt(0);
+      
+      if (summer == 'Y') // if yes summer housing
+      {
+        System.out.println("How many summer credits? ");
+        summerCredits = kb.nextInt();
+        summerTuition = (325 * summerCredits);
+      }
+      else if (summer == 'N') // if no summer housing
+      {
+        summerTuition = 0;
+      }
+      
+      System.out.println("Do you want a meal plan? (Meal plan mandatory for residents) ");
+      System.out.println("Y = yes, N = no ");
+      mealplan = kb.next().charAt(0);
+      
+      if (mealplan == 'Y') // see above
+      {
+        mealplanPrice = 2400*2;
+      }
+      else if (mealplan == 'N')
+      {
+        mealplanPrice = 0;
+      }
+       
+      System.out.println("Which room and board option do you want? ");
+      System.out.println("S = Single Bed, D = Double Bed ");
+      roomBoard = kb.next().charAt(0);
+      
+      if (roomBoard == 'S') // single bedroom dorm
+      {
+        roomBoardPrice = 4750*2; 
+      }
+      else if (roomBoard == 'D') // double bedroom dorm
+      {
+        roomBoardPrice = 3400*2;
+      }
+      
+      extraCredits = credits - 18; // credits over 18
+        
+      if(credits >= 24 && credits <= 36) // full time student
+      {
+        tuition = (4000*2) + fullFee;
+      }
+      else if (credits > 36) // student with more than 18 credits 
+      {
+        tuition = (4000*2) + (325 * extraCredits) + fullFee;
+      }
+      else if (credits < 24) // part time student 
+      {
+        tuition = (375 * credits) + (partFee*credits);   
+      }
+      
+      // print the cost of the semester along with room and board and summer tuition (if taking)
+      System.out.println("Cost for Undergraduate Resident student per year = " + (tuition) + mealplanPrice+ roomBoardPrice + summerTuition);
+      
+      // recall the main menu
+      Menu();
+    }
+    
+    // start undergraduate non resident student method 
+    public void UndergraduateNonRes()
+    {
+      
+      System.out.println("How many fall credits are you taking? ");
+      fallCredits = kb.nextInt();
+      
+      System.out.println("How many spring credits are you taking? ");
+      springCredits = kb.nextInt();
+      
+      credits = fallCredits + springCredits;
+      
+      System.out.println("Are you taking summer classes? ");
+      System.out.println("Y = yes, N = no");
+      summer = kb.next().charAt(0);
+      
+      if (summer == 'Y') // if yes for summer housing
+      {
+        System.out.println("How many summer credits are you taking? ");
+        summerCredits = kb.nextInt();
+        summerTuition = (475 * summerCredits);
+      }
+      else if (summer == 'N') // if no for summer housing 
+      {
+        summerTuition = 0;
+      }
+      
+      System.out.println("Do you want a meal plan? (Meal plan mandatory for residents) ");
+      System.out.println("Y = yes, N = no ");
+      mealplan = kb.next().charAt(0);
+      
+      if (mealplan == 'Y') // see above
+      {
+        mealplanPrice = 2400*2;
+      }
+      else if (mealplan == 'N')
+      {
+        mealplanPrice = 0;
+      }
+       
+      System.out.println("Which room and board option do you want? ");
+      System.out.println("S = Single Bed, D = Double Bed, N = No Room and Board ");
+      roomBoard = kb.next().charAt(0);
+      
+      if (roomBoard == 'S') // single bedroom dorm
+      {
+        roomBoardPrice = 4750*2;
+      }
+      else if (roomBoard == 'D') // double bedroom dorm
+      {
+        roomBoardPrice = 3400*2;
+      }
+      else if (roomBoard == 'N') // no room/board
+      {
+        roomBoardPrice = 0;
+      }
+
+      extraCredits = credits - 18; //  credits over 18   
+        
+      if(credits >= 24 && credits <= 36) // full time stduent
+      {
+        tuition = (5850*2) + fullFee;        
+      }
+      else if (credits > 36) // student with more than 18 credits 
+      {
+        tuition = (5850*2) + (475 *extraCredits) + fullFee;
+      }
+      else if (credits < 24) // part time student
+      {
+        tuition = (525 * credits) + (partFee*credits);
+      }
+      
+      // print the cost of the semester along with room and board and summer tuition (if taking)
+      System.out.println("Cost for Undergraduate Non-Resident student per year = " + (tuition) + mealplanPrice + roomBoardPrice + summerTuition);
+      
+      // recall the main menu
+      Menu();
+    }
+    
+    // start undergraduate international student method 
+    public void UndergraduateInt()
+    {
+      
+      System.out.println("How many fall credits are you taking? ");
+      fallCredits = kb.nextInt();
+      
+      System.out.println("How many spring credits are you taking? ");
+      springCredits = kb.nextInt();
+      
+      credits = fallCredits + springCredits;
+ 
+      System.out.println("Are you taking summer classes? ");
+      System.out.println("Y = yes, N = no");
+      summer = kb.next().charAt(0);
+      
+      if (summer == 'Y') // if yes for summer classes
+      {
+        System.out.println("How many summer credits are you taking? ");
+        summerCredits = kb.nextInt();
+        summerTuition = (625 * credits);
+      }
+      else if (summer == 'N') // if no for summer classes 
+      {
+        summerTuition = 0;
+      }
+      
+      System.out.println("Do you want a meal plan? (Meal plan mandatory for residents) ");
+      System.out.println("Y = yes, N = no ");
+      mealplan = kb.next().charAt(0);
+      
+      if (mealplan == 'Y') // see above
+      {
+        mealplanPrice = 2400*2;
+      }
+      else if (mealplan == 'N')
+      {
+        mealplanPrice = 0;
+      }
+       
+      System.out.println("Which room and board option do you want? ");
+      System.out.println("S = Single Bed, D = Double Bed, N = No Room and Board ");
+      roomBoard = kb.next().charAt(0);
+      
+      if (roomBoard == 'S') // single bedroom dorm
+      {
+        roomBoardPrice = 7500*2;
+      }
+      else if (roomBoard == 'D') // double bedroom dorm
+      {
+        roomBoardPrice = 4000*2;
+      }
+      else if (roomBoard == 'N') // no room/board
+      {
+        roomBoardPrice = 0;
+      }
+      
+      extraCredits = credits - 18; // credits over 18
+      
+      if(credits >= 24 && credits <= 36) // full time student
+      {
+        tuition = (7550*2) + fullFee;
+      }
+      else if (credits > 36) // student with more than 18 credits 
+      {
+        tuition = (7555*2) + (625 * extraCredits) + fullFee;
+      }
+      else if (credits < 24) // part time student
+      {
+        tuition = (675 * credits) + (partFee*credits);
+      }
+      
+      // print the cost of the semester along with room and board and summer tuition (if taking)
+      System.out.println("Cost for Undergraduate International student per year = " +  (tuition) + mealplanPrice + roomBoardPrice + summerTuition);
+      
+      // recall the main menu
+      Menu();
+    }
+    
+
+  // costSemester/roomBoardPrice/summerTuition values/formulas ALL from given tables!!!!!
+    
+
+}
