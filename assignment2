@@ -1,3 +1,5 @@
+// write a program that performs linear and quadratic calculations
+
 import java.util.Scanner;
 
   public class assignment2
