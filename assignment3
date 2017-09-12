@@ -1,3 +1,5 @@
+// write a program that simulates action within a bank account
+
 import java.util.Scanner;
 public class bankAccount1
 {
