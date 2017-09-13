@@ -1,0 +1,65 @@
+// write a program that takes in financial information about a family and calculate their balances 
+// part 1
+
+import java.io.*;
+import java.util.Scanner;
+public class Program7
+{
+  public static void main(String[] args) throws IOException 
+  {
+   // declare strings and arrays
+   // name strings and income array is 12 because there are 12 total family members
+   // other arrays are 4 because we are transfering to a new array with 4 members 
+   String lname[] = new String[12];
+   String fname[] = new String[12];
+   double famIncome[] = new double[12];
+   double adjInc[] = new double[4];
+   double taxRate[] = new double[4];
+   double famTax[] = new double[4];
+
+   int i;
+ 
+   // call the outfile 
+   PrintWriter outfile = null;
+    
+    outfile = new PrintWriter(new FileOutputStream("familyresults.dat"));
+    
+    // call the infile 
+    Scanner infile = new Scanner(new FileInputStream("familyinfo.dat"));
+    
+    // declare arrays to the infile 
+    for(i=0; i<12; i++)
+    {
+      lname[i] = infile.next();
+      fname[i]= infile.next();
+      famIncome[i] = infile.nextDouble();
+      
+    }
+    
+      outfile.println("List of Families: ");
+      outfile.println(); 
+    
+      // print list of names/incomes to the outfile 
+    for(i=0; i<12; i++)
+    {
+      outfile.println(lname[i] + "\t" + fname[i] + "\t" + famIncome[i]);
+    
+    }
+   
+   
+    // object/constructor line 
+    Program7contd pc = new Program7contd(lname, famIncome, outfile, adjInc, taxRate, famTax);
+    
+    // call all methods 
+    pc.sort();
+    pc.deductions();
+    pc.adjustedInc();
+    pc.taxRate();
+    pc.famTax();
+     
+    // close files
+    infile.close();
+    outfile.close();
+   
+  }
+}
