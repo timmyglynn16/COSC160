@@ -1,0 +1,31 @@
+// write program to find the average of several numbers using a "file"
+// the data file is not displayed, this is just the code to average the numbers from a data file i have on my computer 
+
+import java.io.*; // * means gives you all the files needed for IO
+import java.util.Scanner;
+
+public class inputfile
+{
+  public static void main(String[ ] args) throws IOException
+  {
+    
+    int num, count=0;
+    double sum=0, avg;
+    
+    Scanner infile = new Scanner(new FileInputStream // function to input file 
+                                   ("data1.dat")); // name of file 
+    
+    while(infile.hasNextInt())
+    {
+      num = infile.nextInt();
+      sum = sum + num;
+      count ++;
+    }
+    
+    infile.close();
+    
+    avg = sum/count;
+    System.out.println("the avg of the number is " + avg);
+    
+  }
+}
