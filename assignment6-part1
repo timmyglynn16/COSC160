@@ -1,0 +1,44 @@
+// This assignment had 7 parts:
+
+// 1. read 12 integer numbers and store them in a one dimensional array, List1. Print the array
+// 2. Store List1 in List2. Reverse the content of array List2. Multiply each element of List1 by corresponding element of 
+//    List2 and store them in List2. Print List2
+// 3. Delete the third element of array List1. Print the array
+// 4. Insert number 22 in the array, List1, at position n. Print the array
+// 5. Store the elements of the array List1 as a 2 dimensional array, List3, with 3 rows and 4 columns. Print the array. 
+//    Calculate the sum of each row and print it. Save the sum of each row in an array, List4.
+// 6. Sort the array List4 in an increasing order, using the selection sort. Print the sorted array
+// 7. Search the array List4 to find the key entered by the user. Print an appropriate message if the key is not in the array. 
+//    Otherwise print the position where the key is found.
+
+public class Assign6
+{
+ // start main method
+ public static void main(String[] args)
+ {
+  
+  // create an object for Program6contd class
+  Program6contd pc = new Program6contd();
+  
+  // call method for #1
+  pc.num1();
+  
+  // call method for #2
+  pc.num2();
+  
+  // call method for #3
+  pc.num3();
+  
+  // call method for #4
+  pc.num4();
+  
+  // call method for #5
+  pc.num5();
+  
+  // call method for #6
+  pc.num6();
+  
+  // call method for #7
+  pc.num7();
+ }
+}
