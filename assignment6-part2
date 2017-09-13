@@ -1,0 +1,215 @@
+// Assignment 6 cont'd
+// performs all tasks listed in Assign6
+
+import java.util.Random;
+import java.util.Scanner;
+public class Assign6contd
+{
+ // declare instance variables
+ int rows = 3, columns = 4; 
+ 
+ // declare arrays
+ int[ ] List1 = new int[12];
+ int[ ] List2 = new int[12];
+ int[ ][ ] List3 = new int[12][12];
+ int[ ] List4 = new int[12];
+ 
+ Scanner kb = new Scanner(System.in);
+ 
+ // implement constructor
+ public Program6contd()
+ {
+   this.List1 = List1;
+   this.List2 = List2;
+   this.List3 = List3;
+   this.List4 = List4;
+ }
+ 
+ // #1 - read twelve integers and store them in a 1D array, List1. Print the Array
+ public void num1()
+ {
+  List1 = new int[12]; 
+  System.out.println("Enter 12 integer values:");
+  for(int i=0; i < 12; i++)
+  {
+   List1[i] = kb.nextInt();   
+  }
+  
+  System.out.println("\nList1: ");
+  print1DArray(List1);
+ }
+ 
+ // #2 - Store List1 in List2
+ //    - Reverse the content of array List2
+ //    - Multiply each element of List1 by List2 and store them in List2
+ //    - Print List 2
+ public void num2()
+ {
+  List2 = new int[12]; 
+  
+  for(int i = 12 -1, j=0; i >= 0 && j < 12; i--, j++)  //  two diff arrays need diff pointers 
+  {
+   List2[j] = List1[i];
+  }
+  
+  for(int i=0; i < 12; i++)
+  {
+   List2[i] = List2[i] * List1[i];
+  }
+  
+  System.out.println("\nList2: ");
+  print1DArray(List2);
+ }
+ 
+ // #3 - delete the third element of the array List1. Print the array
+ public void num3()
+ {
+  for(int i =2; i < 12 - 1; i++)
+  {
+   List1[i] = List1[i + 1]; // deletion line
+  }
+  
+  System.out.println("\nList1: ");
+  print1DArray(List1);
+ }
+ 
+ // #4 - insert the number 22 in the array, List1, at position n. Print the array
+ public void num4()
+ {
+  int n = generateRandomPosition(List1); // ???????
+  
+  for(int i = 12 - 1; i>n; i--) // decrementing = i>n, i-- 
+    // incrementing = i<n, i++
+  {
+   List1[i] = List1[i - 1];
+  }
+  
+  List1[n] = 22;
+  
+  System.out.println("\nList1: ");
+  print1DArray(List1);
+ } 
+ 
+ // #5 - Store the elements of the array List1 as a 2D array, List3, with 3 rows and 4 columns
+ //    - Print the array
+ //    - Calculate the sum of each row and print it
+ //    - Save the sum of each row in an array, List4
+ public void num5()
+ {
+  List3 = new int[rows][columns];
+  int k = 0; 
+  
+  for(int i =0; i < rows; i++)
+  {
+   for(int j=0; j < columns; j++)
+   {
+    List3[i][j] = List1[k];  
+    k++;
+   }
+  }
+  
+  System.out.println("\nList3:");
+  print2DArray(List3);
+  
+  List4 = new int[rows];
+  
+  for(int i=0; i <rows; i++)
+  {
+   int sum = 0;
+   for(int j=0; j < columns; j++)
+   {
+    sum += List3[i][j];
+   }
+   
+   System.out.println("Sum of row #" + (i + 1) + ":  " + sum);
+   List4[i] = sum;
+  }
+ }
+ 
+ // #6 - sort the array List4 in an increasing order, using the selection sort
+ //    - print the sorted array
+ public void num6()
+ {
+  for(int i=0; i < rows - 1; i++)
+  {
+   int min = i; // points to beginning of array but also keeps 
+   for(int j = i + 1; j<rows; j++) // j always has to be the next number up from i! i+1
+   {
+    if(List4[min] > List4[j]) // if greater, min = j
+    {
+     min = j; // j is the pointer to the index, index is in this case needs to be the min because we need to remember the min
+    }
+   }
+
+   if(i != min)
+   {
+     // SWAP LOOP
+    int temp = List4[i]; // temp is where min gets swapped to
+    List4[i] = List4[min];
+    List4[min] = temp;
+   }
+  }
+  
+  System.out.println("\nList4: ");
+  print1DArray(List4);
+ }
+ 
+ // #7 - Search the array List4 to find the key entered by the user
+ //    - print an appropriate message if the key is not in the array
+ //    - otherwise print the position where the key is found
+ public void num7()
+ {
+  System.out.println("\nEnter key number: ");
+  int key = kb.nextInt();
+  
+  boolean found = false;
+  int index =0; // point to 0th first, index is whatever we are pointing to, like a reference 
+  
+  while(index < rows && !found) // not found
+  {
+   if(List4[index] == key)
+    found = true;
+   else
+    index++; // go to next number
+  }
+  
+  if(found)
+   System.out.println(key + " is found at position " + index);
+  else
+   System.out.println(key + " is not found");
+ }
+ 
+ // method to print 1D array
+ public void print1DArray(int[ ] list)
+ {
+  for(int i=0; i<list.length; i++)
+  {
+   System.out.print(list[i] + " ");
+  }
+  System.out.println();
+ }
+ 
+ // method to print 2D array
+ public void print2DArray(int[ ][ ] list)
+ {
+  for(int i=0; i < list.length; i++)
+  {
+   for(int j=0; j < list[i].length; j++)
+   {
+    System.out.print(list[i][j] + " ");
+   }
+   System.out.println();
+  }
+  System.out.println();
+ }
+ 
+ // EXTRA - write a method to generate a random number for the postion n for #4
+ public int generateRandomPosition(int[ ] List1)
+ {
+  Random rand = new Random();
+  
+  int randomIndex = rand.nextInt(List1.length);
+  
+  return randomIndex;
+ }
+}
