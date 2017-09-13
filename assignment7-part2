@@ -1,0 +1,156 @@
+// assignment 7 cont'd
+
+import java.io.*;
+public class Program7contd
+{
+  // declare variables 
+  double famIncome[], temp2; // need temp with this variable for bubble search loops
+  double adjInc[];
+  double taxRate[];
+  double famTax[];
+  int count = 11; // needs to be 1 less than size of arrays (12)
+  int flag = 0; // for while loop
+  int deductions[] = {1,1,1,1}; // another way to say size of deductions is 4
+  String lname[], temp1; // need temp with this variable for bubble search loops
+  PrintWriter outfile;
+  
+  // declare index variables
+  int i;
+  int j;
+  
+  // declare temporary variables for array compare 
+  String lnametemp[] = new String[4];
+  double famIncometemp[] = {0,0,0,0}; // another way to say size of famIncometemp is 4
+
+  
+  // call constructor method
+  public Program7contd(String lname[], double famIncome[], PrintWriter outfile, double adjInc[], 
+                       double taxRate[], double famTax[])
+  {
+    this.lname = lname;
+    this.famIncome = famIncome;
+    this.outfile = outfile;
+    this.adjInc = adjInc;
+    this.taxRate = taxRate;
+    this.famTax = famTax;
+
+  }
+  
+  
+// calculate deductions: dont print   
+  public void deductions()
+  {
+    
+    // set the first index of temp array equal to first index of original array
+    famIncometemp[0] = famIncome[0];
+    for(int i=0; i<11; i++)
+    {
+      // if the first element in lname = next element of lname...
+        if(lname[i].equals(lname[i+1]))
+        {
+          // then the first index in lnametemp (temp array) is filled (=) to that name 
+          // then also add the incomes of each member  
+          // then also increment the counter (deductions)
+          lnametemp[j] = lname[i+1];
+          famIncometemp[j] += famIncome[i+1];
+          deductions[j]++;
+        }
+        // if that is not the case 
+        else
+        {
+          // then the next index in lname temp (temp array) is filled with the name not equal to lname[i]
+          // then also add the incomes of each member 
+          // then also go to the next index of j
+          lnametemp[j+1] = lname[i+1];
+          famIncometemp[j+1] = famIncome[i+1];
+          j++;
+        }
+        
+    }
+
+   outfile.println(); 
+   outfile.println("Tax Data for Each Family: ");
+   outfile.println();
+   
+  }
+  
+  
+ // calculate adjusted income tax: print to outfile 
+  public void adjustedInc()
+  { 
+      for(j=0; j<4; j++)
+      {
+        adjInc[j] = famIncometemp[j] - (500 * deductions[j]);
+        outfile.println("Adjusted Income for " + lnametemp[j] + " : " + adjInc[j]);
+      }     
+   }
+  
+  
+ // calculate tax rate: dont print 
+  public void taxRate()
+  {
+    for(j=0; j<4; j++)
+    {
+      if(famIncometemp[j] < 60000.00)
+      {
+      taxRate[j] = adjInc[j]/100000.00;
+      }
+      else if(famIncometemp[j] >= 60000.00)
+      {
+        taxRate[j] = .50;
+      }
+    }
+    
+  }
+  
+  
+ // calculate family tax: print to outfile  
+  public void famTax()
+  {
+    outfile.println();
+    for(j=0; j<4; j++)
+    {
+      famTax[j] = (taxRate[j]*adjInc[j]);
+      outfile.println("Taxes for " +lnametemp[j] + " : " + famTax[j]);
+    }
+       
+  }
+  
+ 
+  // sort the last names in alphabetical order: print the sorted list after the original list
+  public void sort()
+  {
+    // basically copied from bsort2 - still unsure of what flag means but i get the idea
+    while(flag==0)
+    {
+      flag=1;
+      for(i=0; i<count;i++)
+      {
+        
+        if(lname[i].compareTo(lname[i+1]) >0)
+        {
+          // run loop for last names
+          temp1 = lname[i];
+          lname[i] = lname[i+1];
+          lname[i+1] = temp1;
+          
+          // run loop for incomes
+          temp2 = famIncome[i];
+          famIncome[i]= famIncome[i+1];
+          famIncome[i+1] = temp2;
+          flag=0;
+        }        
+      }     
+      count--;
+    }
+    
+    outfile.println();
+    outfile.println("Sorted List of Families:");
+    outfile.println();
+    for(i=0; i<12; i++)
+    {
+      outfile.println(lname[i]+ " "  + famIncome[i]); 
+    }
+    
+  }
+  
