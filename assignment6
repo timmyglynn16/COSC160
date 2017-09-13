@@ -1,0 +1,37 @@
+// write a program that takes in an array, reverses the array, and stores the reversed set of numbers in a new array
+
+import java.util.Scanner;
+public class assignment6
+{
+  public static void main(String[ ] args)
+  {
+    
+    // #1 - read 12 integer numbers and store them in a one dimentional array, List1
+    // print the array
+    int [ ] list1 = new int [12];
+    int i, temp;
+    
+    Scanner kb = new Scanner(System.in);
+    
+    System.out.println("Enter 12 integer numbers ");
+    for(i=0; i<list1.length; i++)
+    {
+      list1[i] = kb.nextInt();
+    }
+    
+    // #2 - store List1 in List2
+    // Reverse the content of array List2
+    // Multiply each element of List1 by the corresponging element of List2 and store in List2
+    // print the array
+    int [ ] list2 = new int [12];
+    int first = 0, last = list2.length -1;
+    
+    for(i = 0; i<12; i++)
+    {
+      list2[i] = list1[i];
+    }
+    
+          
+    System.out.println("New reversed array = " + list2);
+  }
+}
