@@ -1,3 +1,5 @@
+// calculate the tuition of a college student (part 2)
+
 import java.util.Scanner;
 public class myTuition
 {
