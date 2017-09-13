@@ -1,3 +1,5 @@
+// calculate the tuition of college students (part 1)
+
 import java.util.Scanner;
 public class universityCost
 {
